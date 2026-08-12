@@ -1,0 +1,16 @@
+{
+  "articles": [
+    {
+      "no": "【時事問題編】No.8",
+      "hashtags": [
+        "#test_1"
+      ]
+    },
+    {
+      "no": "【時事問題編】No.7",
+      "hashtags": [
+        "#test_2", "#test3"
+      ]
+    }
+  ]
+}

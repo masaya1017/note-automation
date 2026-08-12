@@ -1,0 +1,15 @@
+{
+  "name": "note-hashtag-republish",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "login": "node scripts/login_setup.mjs",
+    "fetch": "node scripts/fetch_articles.mjs",
+    "dry-run": "node scripts/note_hashtag_republish.mjs \"シンギュラリティ時代のCxO戦略論文シリーズ[時時問題編].json\" --dry-run",
+    "publish": "node scripts/note_hashtag_republish.mjs \"シンギュラリティ時代のCxO戦略論文シリーズ[時時問題編].json\""
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  }
+}
