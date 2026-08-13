@@ -12,9 +12,16 @@ npm run login
 ブラウザが開くのでnote.comにログインし、ターミナルに戻ってEnterキーを押す。
 `note_storage_state.json`（ログインセッション。**Git管理・共有厳禁**）が保存される。
 
+対話的にEnterキーを押せない実行環境（自動化ツール経由など）の場合は、ログイン完了を自動検知する
+`scripts/login_setup_auto.mjs` を使う（`node scripts/login_setup_auto.mjs`。最大10分待機し、
+`/notes` へ正常遷移できた時点でセッションを自動保存する）。
+
+**Microsoft Edgeがインストールされていること。** 本体スクリプトは`channel: 'msedge'`を指定してChromiumではなく
+Edgeを起動する。
+
 ## 使い方
 
-1. 対象記事とハッシュタグを `シンギュラリティ時代のCxO戦略論文シリーズ[根幹論文].json` に記入する
+1. 対象記事とハッシュタグを `シンギュラリティ時代のCxO戦略論文シリーズ[時時問題編].json` に記入する
 
    ```json
    {
@@ -63,10 +70,11 @@ npm run fetch
 
 ```
 .
-├── シンギュラリティ時代のCxO戦略論文シリーズ[根幹論文].json  # 処理対象の指定
+├── シンギュラリティ時代のCxO戦略論文シリーズ[時時問題編].json  # 処理対象の指定
 ├── note_storage_state.json        # ログインセッション（Git管理禁止）
 ├── scripts/
-│   ├── login_setup.mjs            # 初回ログイン・セッション保存
+│   ├── login_setup.mjs            # 初回ログイン・セッション保存（対話的にEnterキー入力）
+│   ├── login_setup_auto.mjs       # ログイン完了を自動検知してセッション保存（非対話環境向け）
 │   ├── fetch_articles.mjs         # 記事一覧・シリーズ構成の取得
 │   └── note_hashtag_republish.mjs # 本体：下書き化→タグ入力→再公開
 └── data/                          # 実行結果・取得データの出力先（自動生成）

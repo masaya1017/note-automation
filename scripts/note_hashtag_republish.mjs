@@ -27,6 +27,7 @@ const results = [];
 
 const browser = await chromium.launch({
   headless: false, // headlessだとCORS回避が効かないため固定
+  channel: 'msedge',
   args: ['--disable-web-security', '--disable-site-isolation-trials', '--disable-features=ThirdPartyStoragePartitioning,PrivacySandboxSettings4'],
 });
 const context = await browser.newContext({ storageState: storageStatePath, viewport: { width: 1280, height: 900 } });
@@ -40,9 +41,10 @@ function escapeRegExp(s) {
 // "No.8" が "No.80" 等の一部に誤ってマッチしないよう、識別子直後が数字ではないことを確認する。
 async function findArticleByNo(no) {
   await page.goto('https://note.com/notes', { waitUntil: 'networkidle' });
+  await page.locator('li h3').first().waitFor({ state: 'visible', timeout: 20000 }).catch(() => {});
   await page.waitForTimeout(1200);
 
-  let prevCount = 0;
+  let prevCount = -1;
   for (let i = 0; i < 30; i++) {
     const count = await page.locator('li h3').count();
     if (count === prevCount) break;
